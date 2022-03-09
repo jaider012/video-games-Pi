@@ -1,0 +1,80 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 100ms ease-in-out transform;
+}
+
+.card {
+  width: clamp(600px, 15vw, 500px);
+  display: flex;
+  padding: 1rem;
+  transition: all 0.4s;
+  box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+
+  border-radius: 1rem;
+
+  position: relative;
+  overflow: hidden;
+  margin: 0px;
+}
+.card-title {
+  color: black;
+  font-weight: 400;
+  padding: 0.2em;
+}
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4;
+}
+.cover {
+  width: 150px;
+  height: 200px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.general-info {
+
+  font-weight: 400;
+  flex: 1;
+}
+
+.general-info h2 {
+  margin-bottom: 0.5rem;
+}
+.movie-info {
+  margin-top: 1rem;
+  width: 90%;
+}
+.general-info div {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+.cover1 {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  opacity: 0.5;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 30%;
+  width: 10%;
+  height: 100%;
+  background-image: linear-gradient(to right, #161616, transparent);
+  z-index: 2;
+}

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const axios = require("axios");
-const { Videogame, Genero } = require("../db");
+const { Videogame, Genres } = require("../db");
 const { API_KEY } = process.env;
 
 // Importar todos los routers;
@@ -35,32 +35,29 @@ const getvideogames = async () => {
   }
 };
 const getdbgames = async () => {
-  try {
-    let dbgamesdata = await Videogame.findAll({
-      include: {
-        model: Genero,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  let dbgamesdata = await Videogame.findAll({
+    include: {
+      model: Genres,
+      attributes: ["name"],
+      through: {
+        attributes: [],
       },
-    });
-    const dbgames = dbgamesdata.map((e) => {
-      return {
-        id: e.id,
-        name: e.name,
-        rating: e.rating,
-        backgroundimage: e.backgroundimage,
-        genres: e.genres.map((e) => e.name),
-        description: e.description,
-        released: e.released,
-        plataforms: e.plataforms.map((p) => p.plataforms.name),
-      };
-    });
-    return dbgames;
-  } catch (error) {
-    console.log(error);
-  }
+    },
+  });
+
+  // const dbgames = dbgamesdata.map((e) => {
+  //   return {
+  //     id: e.id,
+  //     name: e.name,
+  //     rating: e.rating,
+  //     background_image: e.backgroundimage,
+  //     genres: e.genres.map((e) => e.name),
+  //     descripcion: e.description,
+  //     released: e.released,
+  //     plataforms: e.plataforms.map((p) => p.plataforms.name),
+  //   };
+  // })
+  return dbgamesdata;
 };
 
 const getAllInfo = async () => {
@@ -69,7 +66,8 @@ const getAllInfo = async () => {
     let dbgames = await getdbgames();
 
     const allinfo = apInfo.concat(dbgames);
-    return allinfo;
+
+    return allinfo; //info concat
   } catch (error) {
     console.log(error);
   }
@@ -78,31 +76,25 @@ const getAllInfo = async () => {
 router.get("/videogames", async (req, res) => {
   //DEVUELVE LOS JUEGOS SI NO LE PASAN QUERY, SI LE PASAN QUERY LO BUSCA Y DEVUELVE LAS PRIMERAS 15 COINCIDENCIAS
   const { name } = req.query;
-  try {
-    const allgames = await getAllInfo();
-    if (name) {
-      let gameName = allgames.filter((e) =>
-        e.name.toLowerCase().includes(name.toLowerCase())
-      );
-      gameName.lexngth
-        ? res.status(200).json(gameName)
-        : res.status(404).send("no esta el juego");
-    } else {
-      console.log("pasa por aqui");
-      res.status(200).json(allgames);
-    }
-  } catch (error) {
-    console.log(error);
+
+  const allgames = await getAllInfo();
+  if (name) {
+    let gameName = allgames.filter((e) =>
+      e.name.toLowerCase().includes(name.toLowerCase())
+    );
+    gameName.length
+      ? res.status(200).json(gameName)
+      : res.status(404).send("no existe el juego");
+  } else {
+    res.status(200).send(allgames);
   }
-  // const dbgames = await getdbgames();
-  // res.send(dbgames);
 });
 
 router.get("/videogame/:id", async function (req, res) {
   const { id } = req.params;
   try {
     if (id.length > 7 && typeof id === "string") {
-      let gameCreated = await getGameDataBase();
+      let gameCreated = await getdbgames();
       let gameID = await gameCreated.filter((gi) => gi.id === id);
 
       return res.status(200).json(gameID);
@@ -111,6 +103,7 @@ router.get("/videogame/:id", async function (req, res) {
       // axios.get(`https://api.rawg.io/api/games/3498?key=232664f6fc6541e2a787c5d2528caac5`).then((z) =>{
       //     res.send(z.data)
       // }).catch(e => next(e))
+
       const gameById = await axios.get(
         `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
       );
@@ -140,11 +133,10 @@ router.get("/genres", async function (req, res) {
     const genres = genresApi.data.results.map((g) => g.name);
     //bulkcreate >>> squelize
     genres.forEach((el) => {
-      Genero.findOrCreate({ where: { name: el } });
+      Genres.findOrCreate({ where: { name: el } });
     });
 
-    const allGenres = await Genero.findAll();
-    console.log(allGenres);
+    const allGenres = await Genres.findAll();
     res.send(allGenres);
   } catch (error) {
     console.log(error);
@@ -152,23 +144,23 @@ router.get("/genres", async function (req, res) {
 });
 
 router.post("/videogame", async function (req, res) {
+  console.log(req.body);
   try {
     let {
       name,
       background_image,
-      descripcion,
+      description,
       released,
       rating,
       genres,
-      plataforma,
+      platforms,
       createdVideoGame,
     } = req.body;
- 
-    if (!name || !descripcion || !plataforma||!genres) {
+
+    if (!name || !description || !platforms || !genres) {
       // le pregunto si estan esos datos, sino debe completarlos
       res.status(404).send("Falta data");
     } else {
-      
       let newGame = await Videogame.create({
         // creo mi video juegos en la base de datos
 
@@ -176,20 +168,20 @@ router.post("/videogame", async function (req, res) {
         background_image:
           background_image ||
           "https://ceinaseg.com/wp-content/uploads/2021/09/videogames-controller-1920x1080-1.jpg",
-        descripcion,
+        description,
         released,
         rating,
-        plataforma,
+        platforms,
         createdVideoGame,
       });
- 
+
       genres.forEach(async (e) => {
         //recorro por los generos que me pasen y los busco en mi base de datos
 
         let genderDB = await Genero.findAll({ where: { name: e.name } });
-        newGame.addGenre(genderDB); // le agrego a mi juego creado el genero seleccionado de la base
+        newGame.addGenero(genderDB); // le agrego a mi juego creado el genero seleccionado de la base
       });
-      res.status(200).json({ message: "Juego creado ", newGame });
+      res.status(200).json(newGame);
     }
   } catch (error) {
     console.log(error);

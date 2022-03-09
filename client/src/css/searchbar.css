@@ -1,0 +1,22 @@
+.searchbar {
+  border: solid transparent;
+  border-radius: 3px;
+  padding: 0.5em;
+  background: rgb(24, 47, 75) 25%;
+  color: white;
+  margin-right: 0.5em;
+  width: 20vw;
+}
+.button {
+  border: solid transparent;
+  border-radius: 3px;
+  padding: 0.5em;
+
+  background: rgb(15, 33, 54) 25%;
+  color: white;
+  transition: .3s;
+}
+.button:hover {
+  background: rgb(34, 62, 95) 25%;
+  box-shadow: 5px 5px 5px 1px #4c334d;
+}

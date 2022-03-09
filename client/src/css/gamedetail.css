@@ -1,0 +1,211 @@
+.Fondo-Detail {
+  background: rgb(5, 60, 94);
+  background: linear-gradient(
+    150deg,
+    rgba(5, 60, 94, 1) 0%,
+    rgba(29, 57, 88, 1) 25%,
+    rgba(53, 54, 82, 1) 46%,
+    rgba(76, 51, 77, 1) 66%,
+    rgba(148, 43, 59, 1) 87%
+  );
+  height: 100vh;
+  background-attachment: fixed;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: scroll;
+}
+
+.container-info{
+  display: flex;
+  flex-direction: column;
+  align-content: center
+}
+
+.Conte-Sub {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.151);
+  box-shadow: 1px 1px 18px -25px #080808;
+  margin: 1.5% 5% 5% 5%;
+  padding-top: .5rem;
+  padding-bottom: .7rem;
+}
+
+.Titulo-Detail {
+  font-family: "Staatliches";
+  text-align: center;
+  position: relative;
+  letter-spacing: 6px;
+  font-size: 3rem;
+  color: #ffffff;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  text-shadow: 2px 2px 15px rgb(14, 158, 224);
+}
+
+.img-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ImagenDetail {
+  height:350px;
+  width: 630px;
+
+  padding: 0;
+  justify-content: center;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.767);
+  border-radius: 8px;
+}
+
+.TituloRating {
+  font-family: "Red Hat Display", Black 900;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 2%;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  text-align: justify;
+  padding-left: 3%;
+}
+
+.Conte-Rating {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.1rem;
+  line-height: 2.3rem;
+  align-items: center;
+  font-weight: 400;
+  min-width: 10px;
+  font-family: "Red Hat Display", sans-serif;
+  margin-top: 10px;
+  text-align: justify;
+  padding-left: 5%;
+}
+
+.TituloFecha {
+  font-family: "Red Hat Display", Black 900;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 2%;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  text-align: justify;
+  padding-left: 3%;
+}
+
+.Conte-Fecha {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.1rem;
+  font-family: "Red Hat Display", sans-serif;
+  margin-top: 2%;
+  padding-left: 5%;
+}
+
+.TituloPlataforma {
+  font-family: "Red Hat Display", Black 900;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 2%;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  
+  padding-left: 3%;
+}
+
+.Conte-Plataform {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.1rem;
+  line-height: 2.3rem;
+  align-items: center;
+  font-weight: 400;
+  min-width: 10px;
+  font-family: "Red Hat Display", sans-serif;
+  margin-top: 10px;
+  text-align: justify;
+  padding-left: 5%;
+}
+
+.TituloGeneros {
+  font-family: "Red Hat Display", Black 900;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 2%;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  text-align: justify;
+  padding-left: 3%;
+}
+
+.Conte-Generos {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.1rem;
+  line-height: 2.3rem;
+  align-items: center;
+  font-weight: 400;
+  min-width: 10px;
+  font-family: "Red Hat Display", sans-serif;
+  margin-top: 10px;
+  text-align: justify;
+  padding-left: 5%;
+}
+
+.TituloDescripcion {
+  font-family: "Red Hat Display", Black 900;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 2%;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
+  text-align: justify;
+  padding-left: 3%;
+}
+
+.Descripcion-Detalle {
+  color: hsl(0, 0%, 100%);
+  font-size: 1.1rem;
+  line-height: 2.3rem;
+  align-items: center;
+  font-weight: 400;
+  min-width: 10px;
+  font-family: "Red Hat Display", sans-serif;
+  margin-top: 15px;
+  text-align: justify;
+  padding: 0% 3% 5% 3%;
+
+}
+
+.button-back {
+  padding: 0.9em 2.5em;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #00a2f0;
+  background-color: #fff;
+  border-radius: 7px;
+  border: solid transparent;
+ 
+  cursor: pointer;
+  outline: none;
+
+  font-family: "Red Hat Display", sans-serif;
+  transition: all 0.3s ease 0s;
+}
+
+.Contenedor-Boton{
+  display: absolute;
+  top: 15px;
+  left: 15px;
+  position: fixed;
+}
+
+.button-back:hover {
+  background-color: #7ccdf4;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.button-back:active {
+  transform: translateX(2px);
+}
+
+/* .Contenedor-Boton-Volver{
+    margin-bottom: 19px;
+    margin-top: 1%;
+} */

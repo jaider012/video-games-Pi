@@ -1,0 +1,18 @@
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body {
+  background: rgb(5, 60, 94);
+  background: linear-gradient(
+    150deg,
+    rgba(5, 60, 94, 1) 0%,
+    rgba(29, 57, 88, 1) 25%,
+    rgba(53, 54, 82, 1) 46%,
+    rgba(76, 51, 77, 1) 66%,
+    rgba(148, 43, 59, 1) 87%
+  );
+  height: 100vh;
+  background-attachment: fixed;
+}

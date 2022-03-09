@@ -1,0 +1,80 @@
+*,
+*::after,
+*::before,
+div {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.Link {
+  text-decoration: none;
+  color: black;
+}
+.contenedor-filtro {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0.5em;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+.button-reset {
+  padding: 5px;
+  border: solid transparent 1px;
+  border-radius: 5px;
+  background: #114668;
+  color: white;
+  cursor: pointer;
+}
+.button-reset:hover {
+  box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4;
+}
+
+.Selector {
+  padding: 5px;
+  border: solid transparent 1px;
+  border-radius: 5px;
+  background: #053c5e;
+  color: white;
+  cursor: pointer;
+}
+.Selector:hover {
+  box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
+  transition: all 0.4;
+}
+.options {
+  padding: 5px;
+  border-radius: 5px;
+  background: #053c5e;
+  color: white;
+}
+.mario {
+  height: 200px;
+  width: 200px;
+  animation-name: mario;
+  position: relative;
+  animation-duration: 20s;
+  animation-timing-function: ease;
+}
+
+@keyframes mario {
+  0% {
+    left: 10px;
+    top: 10px;
+  }
+  20% {
+    left: 35rem;
+  }
+}

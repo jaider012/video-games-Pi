@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descripcion: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -27,10 +27,10 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT ,
       allowNull: true,
     },
-    backgroundimage: {
+    background_image: {
       type: DataTypes.STRING,
     },
-    plataforma: {
+    platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },

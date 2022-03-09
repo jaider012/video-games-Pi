@@ -1,0 +1,90 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.made {
+  margin-top: 30px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 5em;
+
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.fondo {
+  background-image: url("../img/bf4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  background-attachment: fixed;
+}
+.alig {
+  margin-bottom: 100px;
+}
+.end {
+  margin-right: 80px;
+}
+.title {
+  font-size: 3rem;
+  color: #ffff;
+  font-family: "Fredoka", sans-serif;
+  position: relative;
+  text-align: right;
+  right: 50px;
+  top: 55px;
+  padding-right: 30px;
+  text-transform: bold;
+}
+.frase {
+  font-size: 2.5rem;
+  color: #ffff;
+  font-family: "Fredoka", sans-serif;
+  position: relative;
+  text-align: right;
+  right: 50px;
+  top: 55px;
+  padding-right: 30px;
+}
+.hecho {
+  font-size: 1.5rem;
+  color: #ffff;
+  font-family: "Fredoka", sans-serif;
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+}
+.icon:hover {
+  color: #ffff;
+  box-shadow: 5px 6px 26px -7px #ffff;
+}
+
+.boton {
+  font-family: "Fredoka", sans-serif;
+  cursor: pointer;
+  outline: none;
+  border: transparent;
+  padding: 0.5em 1.5em;
+  color: #7ccde0;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #171e2e;
+  border-radius: 0.5em;
+  transition: 0.5s linear;
+}
+
+.boton:hover {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    50px 50px 50px 50px rgba(0, 0, 0, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 50px 50px 50px 50px rgba(0, 0, 0, 0);
+  transform: scale(1.1);
+}
