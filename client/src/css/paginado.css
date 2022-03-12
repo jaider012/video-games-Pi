@@ -8,7 +8,6 @@
 }
 
 .BotonPaginado {
-  font-family: "Staatliches";
   font-size: 16px;
 
   color: black;
@@ -26,5 +25,4 @@
 
 .BotonPaginado:hover {
   box-shadow: 2px 3px 10px #db222a;
-
 }

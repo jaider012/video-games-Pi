@@ -5,9 +5,11 @@ import { useEffect } from "react";
 import "../../css/gamedetail.css";
 
 export default function Carddetailes(props) {
+
   let params = useParams();
 
   const id = params.id;
+  
   console.log(id);
 
   const dispatch = useDispatch();

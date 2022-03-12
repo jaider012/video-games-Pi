@@ -1,11 +1,14 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { createGame, getgenres } from "../../action/action";
+import "../../css/newgame.css";
 
 const NewGame = () => {
   const dispatch = useDispatch();
+  const [validador, setvalidador] = useState("");
 
   const genres = useSelector((state) => state.genres);
 
@@ -59,20 +62,21 @@ const NewGame = () => {
   function HandleSubmit(e) {
     e.preventDefault();
     if (valor.name.trim() === "" || valor.name.length < 2) {
-      return alert("Coloca un nombre: debe poseer min 2 carácteres");
+      setvalidador("El nombre: debe poseer min 2 carácteres");
     } else if (valor.description.trim() === "") {
-      return alert("Descripción requerida");
+      setvalidador("Descripción requerida");
     } else if (valor.released.trim() === "") {
-      return alert("Fecha de lanzamiento requerida");
-    } else if (valor.rating.trim() === "") {
-      return alert("Coloca un Puntaje del 1 al 5");
+      setvalidador("Fecha de lanzamiento requerida");
+    } else if (valor.rating.trim() === "" && valor.rating > 6) {
+      setvalidador("El  Puntaje del 1 al 5");
     } else if (valor.platforms.length === 0) {
-      return alert("Coloca una o más Plataformas");
+      setvalidador(" Una o más Plataformas");
     } else if (valor.genres.length === 0) {
-      return alert("Coloca un o más Generos");
+      setvalidador(" Un o más Generos");
     } else {
+      setvalidador("");
+      alert("juego creado");
       dispatch(createGame(valor));
-      alert("Juego Creado");
       setvalor({
         name: "",
         description: "",
@@ -124,13 +128,18 @@ const NewGame = () => {
   //***** */
   return (
     <div>
+      <div>
+        <Link to="/home">
+          <button className="button-back">Volver</button>
+        </Link>
+      </div>
       <h1 className="titulo-crear">Crea tu Juego</h1>
-
+      {validador && <div className="alerta">{validador}</div>}
       <form className="form" id="form" onSubmit={(e) => HandleSubmit(e)}>
         <div className="container-form">
-          <label>Nombre:</label>
+          <div>Nombre:</div>
           <input
-            className="input-formuldivario"
+            className="input-formulario"
             type="text"
             placeholder="Titulo del juego"
             name="name"
@@ -139,9 +148,9 @@ const NewGame = () => {
           />
         </div>
         <div className="container-form">
-          <label>Descripcion :</label>
+          <div className="sub-title">Descripcion :</div>
           <input
-            className="input-formuldivario"
+            className="input-formulario"
             type="text"
             placeholder="Descripcion del juego"
             name="description"
@@ -150,9 +159,9 @@ const NewGame = () => {
           />
         </div>
         <div className="container-form">
-          <label>Fecha de lazamiento :</label>
+          <div>Fecha de lazamiento :</div>
           <input
-            className="input-formuldivario"
+            className="input-formulario"
             type="date"
             placeholder="fecha de lanzamiento"
             name="released"
@@ -161,10 +170,12 @@ const NewGame = () => {
           />
         </div>
         <div className="container-form">
-          <label>Rating:</label>
+          <div>Rating:</div>
           <input
-            className="input-formuldivario"
+            className="input-formulario"
             type="number"
+            max="5"
+            min='1'
             placeholder="Descripcion del juego"
             name="rating"
             value={valor.rating}
@@ -172,9 +183,9 @@ const NewGame = () => {
           />
         </div>
         <div className="container-form">
-          <label>Rating:</label>
+          <div>Background:</div>
           <input
-            className="input-formuldivario"
+            className="input-formulario"
             type="text"
             placeholder=" Url de imagen..."
             name="background_image"
@@ -182,39 +193,43 @@ const NewGame = () => {
             onChange={(e) => HandleChange(e)}
           />
         </div>
-        <div className="container-form">
+        <div className="platfoms">
           <label>plataformas :</label>
-          {plataforms.map((e) => (
-            <label key={e} className="InputGeneros-Form">
-              <input
-                className="Box-Check"
-                type="checkbox"
-                onClick={(e) => handleCheckPlataforms(e)}
-                value={e}
-                name="platforms"
-                key={e}
-              />
-              {e}
-            </label>
-          ))}
+          <div className="grid-check">
+            {plataforms.map((e) => (
+              <div key={e} className="Inputplasform-Form">
+                <input
+                  className="Box-Check"
+                  type="checkbox"
+                  onClick={(e) => handleCheckPlataforms(e)}
+                  value={e}
+                  name="platforms"
+                  key={e}
+                />
+                {e}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="container-form">
+        <div className="ge">
           <label>Generos :</label>
-          {genres.map((e) => (
-            <label key={e.name} className="InputGeneros-Form">
-              <input
-                className="Box-Check"
-                type="checkbox"
-                onClick={(e) => handleCheckGenres(e)}
-                value={e.name}
-                name="genres"
-                key={e}
-              />
-              {e.name}
-            </label>
-          ))}
+          <div className="grid-check">
+            {genres.map((e) => (
+              <div key={e.name} className="InputGeneros-Form">
+                <input
+                  className="Box-Check"
+                  type="checkbox"
+                  onClick={(e) => handleCheckGenres(e)}
+                  value={e.name}
+                  name="genres"
+                  key={e}
+                />
+                {e.name}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
+        <div className="button-create">
           <button className="button-submit" type="submit">
             Crear Juego 🎮
           </button>

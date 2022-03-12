@@ -31,11 +31,11 @@ const Home = () => {
   }, [dispatch]);
 
   // ****PAGINADO***
-  const [Orden,setOrden] = useState("");
+  const [Orden, setOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1); //declaro un estado local y la pag actual, marcando el estado con el que va arrancar.
-  const [videoGamesPerPage,setvideoGamesPerPage] = useState(16); //declaro otro estado local donde tengo la cantidad de juegos por pagina
-  const inOfLastGame = currentPage * videoGamesPerPage; //seteo el indice del ultimo juego y le digo sobre la pag actual multiplicame la cantidad de juegos por pagina
-  const inOfFristGame = inOfLastGame - videoGamesPerPage; // necesito setear el indice de mi primer juego en cad apag, ya que a medida q cambie la pag el primer juego cambia
+  const [videoGamesparPage, setvideoGamesPerPage] = useState(16); //declaro otro estado local donde tengo la cantidad de juegos por pagina
+  const inOfLastGame = currentPage * videoGamesparPage; //seteo el indice del ultimo juego y le digo sobre la pag actual multiplicame la cantidad de juegos por pagina
+  const inOfFristGame = inOfLastGame - videoGamesparPage; // necesito setear el indice de mi primer juego en cad apag, ya que a medida q cambie la pag el primer juego cambia
   const currentVideoGames = videogames.slice(inOfFristGame, inOfLastGame);
 
   const paging = (pages) => {
@@ -77,7 +77,7 @@ const Home = () => {
 
       <div className="contenedor-filtro">
         <Paginado
-          videoGamesPerPage={videoGamesPerPage}
+          videoGamesparPage={videoGamesparPage}
           allGames={videogames.length}
           paging={paging}
         />
@@ -91,7 +91,7 @@ const Home = () => {
               window.location.reload();
             }}
           >
-            perron
+            REFRESCAR
           </button>
         </div>
         <div>
@@ -166,7 +166,7 @@ const Home = () => {
       </div>
       <div className="contenedor-filtro">
         <Paginado
-          videoGamesPerPage={videoGamesPerPage}
+          videoGamesparPage={videoGamesparPage}
           allGames={videogames.length}
           paging={paging}
         />

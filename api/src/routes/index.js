@@ -15,13 +15,13 @@ const getvideogames = async () => {
   try {
     const games = [];
     let url = `https://api.rawg.io/api/games?key=${API_KEY}`;
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 8; i++) {
       let pages = await axios.get(url);
       pages.data?.results.forEach((e) => {
         games.push({
           id: e.id,
           name: e.name,
-          background_image: e.background_image, // en lo de otros dice brack_ground
+          background_image: e.background_image,
           rating: e.rating,
           genres: e.genres.map((gender) => gender.name),
           platforms: e.platforms.map((platform) => platform.platform.name),
@@ -35,7 +35,7 @@ const getvideogames = async () => {
   }
 };
 const getdbgames = async () => {
-  let dbgamesdata = await Videogame.findAll({
+  let dbgamesdata = await Videogame.findAll({ //busca el juego en la base de datos y o retorna
     include: {
       model: Genres,
       attributes: ["name"],
@@ -44,23 +44,10 @@ const getdbgames = async () => {
       },
     },
   });
-
-  // const dbgames = dbgamesdata.map((e) => {
-  //   return {
-  //     id: e.id,
-  //     name: e.name,
-  //     rating: e.rating,
-  //     background_image: e.backgroundimage,
-  //     genres: e.genres.map((e) => e.name),
-  //     descripcion: e.description,
-  //     released: e.released,
-  //     plataforms: e.plataforms.map((p) => p.plataforms.name),
-  //   };
-  // })
   return dbgamesdata;
 };
 
-const getAllInfo = async () => {
+const getAllInfo = async () => { //Concatena el array que viene tanto por la api como por la db  
   try {
     let apInfo = await getvideogames();
     let dbgames = await getdbgames();
@@ -68,6 +55,7 @@ const getAllInfo = async () => {
     const allinfo = apInfo.concat(dbgames);
 
     return allinfo; //info concat
+
   } catch (error) {
     console.log(error);
   }
@@ -78,10 +66,10 @@ router.get("/videogames", async (req, res) => {
   const { name } = req.query;
 
   const allgames = await getAllInfo();
-  if (name) {
+  if (name) { 
     let gameName = allgames.filter((e) =>
       e.name.toLowerCase().includes(name.toLowerCase())
-    );
+    ).slice(0, 16);
     gameName.length
       ? res.status(200).json(gameName)
       : res.status(404).send("no existe el juego");
@@ -89,6 +77,8 @@ router.get("/videogames", async (req, res) => {
     res.status(200).send(allgames);
   }
 });
+
+
 
 router.get("/videogame/:id", async function (req, res) {
   const { id } = req.params;
@@ -100,6 +90,7 @@ router.get("/videogame/:id", async function (req, res) {
       return res.status(200).json(gameID);
     } else {
       // COMO PROMESA
+      
       // axios.get(`https://api.rawg.io/api/games/3498?key=232664f6fc6541e2a787c5d2528caac5`).then((z) =>{
       //     res.send(z.data)
       // }).catch(e => next(e))
@@ -123,6 +114,7 @@ router.get("/videogame/:id", async function (req, res) {
     console.log("monda");
   }
 });
+
 
 router.get("/genres", async function (req, res) {
   try {
@@ -177,9 +169,8 @@ router.post("/videogame", async function (req, res) {
 
       genres.forEach(async (e) => {
         //recorro por los generos que me pasen y los busco en mi base de datos
-
-        let genderDB = await Genero.findAll({ where: { name: e.name } });
-        newGame.addGenero(genderDB); // le agrego a mi juego creado el genero seleccionado de la base
+        let genderDB = await Genres.findAll({ where: { name: e.name} });
+        newGame.addGenres(genderDB); // le agrego a mi juego creado el genero seleccionado de la base/ no se por que no esta funcionando 
       });
       res.status(200).json(newGame);
     }

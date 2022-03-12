@@ -78,7 +78,7 @@ export const reducer = (state = inicialState, action) => {
       };
 
     case types.filterdbgames:
-      const totalGames = state.videogames;
+      const totalGames = state.Copiavideogames;
       const filterCreatedGames = action.payload === "db"
           ? totalGames.filter(ele => ele.createdVideoGame === true)
           : totalGames.filter(ele => ele.createdVideoGame !== true);

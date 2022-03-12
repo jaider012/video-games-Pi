@@ -4,13 +4,15 @@
   justify-content: space-around;
   height: 8vh;
   background-color: #053c5e;
+  z-index: 4;
 }
+
 .brand {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
   color: white;
-  transition: .5s;
+  transition: 0.5s;
 }
 .brand:hover {
   box-shadow: 5px 5px 5px 1px #4c334d;
@@ -27,7 +29,6 @@
   text-decoration: none;
   transition: 0.5s;
   text-transform: uppercase;
-  
 }
 .nav-link:hover {
   color: darkgray;

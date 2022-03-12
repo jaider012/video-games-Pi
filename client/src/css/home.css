@@ -61,6 +61,7 @@ div {
   color: white;
 }
 .mario {
+  margin-top: 20%;
   height: 200px;
   width: 200px;
   animation-name: mario;
@@ -71,10 +72,18 @@ div {
 
 @keyframes mario {
   0% {
-    left: 10px;
-    top: 10px;
+    left: 0vw;
   }
   20% {
-    left: 35rem;
+    left: 35vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 0;
   }
 }

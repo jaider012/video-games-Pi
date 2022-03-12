@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getVideoGameByName } from "../../action/action";
-import '../../css/searchbar.css'
+import "../../css/searchbar.css";
 const Searchbar = () => {
   const dispatch = useDispatch();
 
@@ -22,21 +22,22 @@ const Searchbar = () => {
     e.preventDefault();
     setgame(e.target.value);
   };
-    
+
   return (
-    <div>
+    <form>
       <input
         id="inputsearch"
         className="searchbar"
         type="text"
         placeholder="Busca tu juego"
         onChange={(e) => Hadlesearch(e)}
+        autoComplete={false}
       />
 
       <button className="button" type="submit" onClick={(e) => Hadlesubmit(e)}>
         Enviar
       </button>
-    </div>
+    </form>
   );
 };
 

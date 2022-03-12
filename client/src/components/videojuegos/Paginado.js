@@ -1,9 +1,9 @@
 
 import '../../css/paginado.css'
-export default function Paginado ({videoGamesPerPage, allGames,paging}){
+export default function Paginado ({videoGamesparPage, allGames,paging}){
     const pages = []
 
-    for (let i = 1; i <= Math.ceil(allGames/videoGamesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(allGames/videoGamesparPage); i++) {
         pages.push(i)  
     }
 

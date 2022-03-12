@@ -9,7 +9,7 @@ export const Inicio = () => {
       <div className="flex">
         <div className="alig">
           <h1 className="frase">VIDEOGAMES</h1>
-          <h1 className="frase">
+          <h1 className="frase" data-testid="message">
             La esperanza es lo que nos hace fuertes,
             <br /> Es la razón del por qué estamos aquí,
             <br /> Es por lo que peleamos cuando todo lo demás está perdido
@@ -22,9 +22,8 @@ export const Inicio = () => {
         </div>
 
         <div className="made">
-          <div>
-            <h4 className="hecho">Jaider panqueva</h4>
-          </div>
+          <div className="hecho"> Jaider panqueva 👾 </div>
+
           <div>
             <a
               className="icon"

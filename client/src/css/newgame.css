@@ -1,0 +1,102 @@
+.titulo-crear {
+  font-family: "Staatliches";
+  text-align: center;
+  position: relative;
+  letter-spacing: 6px;
+  font-size: 3rem;
+  color: #ffffff;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  text-shadow: 2px 2px 15px rgb(14, 158, 224);
+}
+.sub-title {
+  font-size: 1rem;
+}
+.form {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.151);
+  box-shadow: 1px 1px 18px -25px #080808;
+  margin: 1.5% 5% 5% 5%;
+  padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+}
+.container-form {
+  margin-left: 35%;
+  margin-right: 5%;
+}
+.grid-check {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.input-formulario {
+  border: solid transparent;
+  border-radius: 5px;
+  padding: 0.1em;
+  margin-left: 15px;
+  background: #114668;
+  width: 50%;
+}
+.alerta{
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 1em 2em 1em 2em;
+
+  border: solid transparent;
+  border-radius: 5px;
+  background:   rgba(148, 43, 59, 1) 87%;
+  color: rgb(255, 224, 224);
+}
+
+.button-back {
+  padding: 0.9em 2.5em;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #00a2f0;
+  background-color: #fff;
+  border-radius: 7px;
+  border: solid transparent;
+
+  cursor: pointer;
+  outline: none;
+
+  font-family: "Red Hat Display", sans-serif;
+  transition: all 0.3s ease 0s;
+  display: absolute;
+  top: 15px;
+  left: 15px;
+  position: fixed;
+}
+.button-back:hover {
+  background-color: #7ccdf4;
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.button-create {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.button-submit{
+  padding: 0.5em 1em;
+  border-radius: 7px;
+  border: solid transparent;
+
+  cursor: pointer;
+  outline: none;
+
+}
+
+.button-submit:hover {
+  background-color: #7ccdf4;
+  
+  transform: scale(1.02);
+}
