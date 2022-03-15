@@ -31,7 +31,7 @@ const Searchbar = () => {
         type="text"
         placeholder="Busca tu juego"
         onChange={(e) => Hadlesearch(e)}
-        autoComplete={false}
+        autoComplete='false'
       />
 
       <button className="button" type="submit" onClick={(e) => Hadlesubmit(e)}>

@@ -53,7 +53,7 @@
   color: rgb(255, 224, 224);
 }
 
-.button-back {
+.button-back1 {
   padding: 0.9em 2.5em;
   font-size: 13px;
   text-transform: uppercase;
@@ -64,17 +64,18 @@
   border-radius: 7px;
   border: solid transparent;
 
+  margin-left: 1rem;
   cursor: pointer;
-  outline: none;
 
   font-family: "Red Hat Display", sans-serif;
   transition: all 0.3s ease 0s;
-  display: absolute;
-  top: 15px;
-  left: 15px;
+
+ 
+
   position: fixed;
+  z-index: 1;
 }
-.button-back:hover {
+.button-back1:hover {
   background-color: #7ccdf4;
   color: #fff;
   transform: translateX(5px);

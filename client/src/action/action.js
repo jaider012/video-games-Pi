@@ -99,7 +99,7 @@ export function resetDetailPage() {
 export function createGame(payload) {
   return async function (dispatch) {
     const info = await axios.post(`http://localhost:3001/videogame`, payload);
-    console.log("QUE INFO TRAE DE POST:", info.data);
+    console.log("QUE INFO TRAE DE POST:", info.data,'INFO QUE LE ENVIO ', payload);
     return dispatch({
       type: types.creaVideogame,
       payload: info.data,

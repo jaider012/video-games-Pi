@@ -35,7 +35,8 @@ const getvideogames = async () => {
   }
 };
 const getdbgames = async () => {
-  let dbgamesdata = await Videogame.findAll({ //busca el juego en la base de datos y o retorna
+  let dbgamesdata = await Videogame.findAll({
+    //busca el juego en la base de datos y o retorna
     include: {
       model: Genres,
       attributes: ["name"],
@@ -44,10 +45,25 @@ const getdbgames = async () => {
       },
     },
   });
-  return dbgamesdata;
+
+  let newdatagame = dbgamesdata.map((e) => {
+    return {
+      id: e.id,
+      name: e.name,
+      rating: e.rating,
+      background_image: e.background_image,
+      genres: e.genres.map((e) => e.name),
+      description: e.description,
+      released: e.released,
+      createdVideoGame: e.createdVideoGame,
+      plataforms: e.plataforms,
+    };
+  });
+  return newdatagame;
 };
 
-const getAllInfo = async () => { //Concatena el array que viene tanto por la api como por la db  
+const getAllInfo = async () => {
+  //Concatena el array que viene tanto por la api como por la db
   try {
     let apInfo = await getvideogames();
     let dbgames = await getdbgames();
@@ -55,7 +71,6 @@ const getAllInfo = async () => { //Concatena el array que viene tanto por la api
     const allinfo = apInfo.concat(dbgames);
 
     return allinfo; //info concat
-
   } catch (error) {
     console.log(error);
   }
@@ -66,10 +81,10 @@ router.get("/videogames", async (req, res) => {
   const { name } = req.query;
 
   const allgames = await getAllInfo();
-  if (name) { 
-    let gameName = allgames.filter((e) =>
-      e.name.toLowerCase().includes(name.toLowerCase())
-    ).slice(0, 16);
+  if (name) {
+    let gameName = allgames
+      .filter((e) => e.name.toLowerCase().includes(name.toLowerCase()))
+      .slice(0, 16);
     gameName.length
       ? res.status(200).json(gameName)
       : res.status(404).send("no existe el juego");
@@ -77,8 +92,6 @@ router.get("/videogames", async (req, res) => {
     res.status(200).send(allgames);
   }
 });
-
-
 
 router.get("/videogame/:id", async function (req, res) {
   const { id } = req.params;
@@ -90,7 +103,7 @@ router.get("/videogame/:id", async function (req, res) {
       return res.status(200).json(gameID);
     } else {
       // COMO PROMESA
-      
+
       // axios.get(`https://api.rawg.io/api/games/3498?key=232664f6fc6541e2a787c5d2528caac5`).then((z) =>{
       //     res.send(z.data)
       // }).catch(e => next(e))
@@ -115,7 +128,6 @@ router.get("/videogame/:id", async function (req, res) {
   }
 });
 
-
 router.get("/genres", async function (req, res) {
   try {
     const genresApi = await axios.get(
@@ -136,7 +148,6 @@ router.get("/genres", async function (req, res) {
 });
 
 router.post("/videogame", async function (req, res) {
-  console.log(req.body);
   try {
     let {
       name,
@@ -150,10 +161,10 @@ router.post("/videogame", async function (req, res) {
     } = req.body;
 
     if (!name || !description || !platforms || !genres) {
-      // le pregunto si estan esos datos, sino debe completarlos
+      // le pregunto si estan esos datos, sino debe completarlos // esta validacion tambien esta en el front
       res.status(404).send("Falta data");
     } else {
-      let newGame = await Videogame.create({
+      let newGame = await Videogame?.create({
         // creo mi video juegos en la base de datos
 
         name,
@@ -168,10 +179,13 @@ router.post("/videogame", async function (req, res) {
       });
 
       genres.forEach(async (e) => {
-        //recorro por los generos que me pasen y los busco en mi base de datos
-        let genderDB = await Genres.findAll({ where: { name: e.name} });
-        newGame.addGenres(genderDB); // le agrego a mi juego creado el genero seleccionado de la base/ no se por que no esta funcionando 
+        console.log(e);
+        // recorro por los generos que me pasen y los busco en mi base de datos
+        let genderDB = await Genres.findAll({ where: { name: e } });
+        await newGame.addGenres(genderDB); // le agrego a mi juego creado el genero seleccionado de la base/ no se por que no esta funcionando
       });
+
+      console.log(newGame);
       res.status(200).json(newGame);
     }
   } catch (error) {

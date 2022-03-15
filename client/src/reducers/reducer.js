@@ -35,8 +35,7 @@ export const reducer = (state = inicialState, action) => {
 
     case types.creaVideogame:
       return {
-        ...state,
-        videogames: action.payload
+        ...state
       };
       
     //*****FILTROS
@@ -44,19 +43,19 @@ export const reducer = (state = inicialState, action) => {
       const orderGames =
         action.payload === "az"
           ? state.Copiavideogames.sort((a, b) => {
-              if (a.name > b.name) {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) {
                 return 1;
               }
-              if (b.name > a.name) {
+              if (b.name.toLowerCase() > a.name.toLowerCase()) {
                 return -1;
               }
               return 0;
             })
           : state.Copiavideogames.sort((a, b) => {
-              if (a.name > b.name) {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) {
                 return -1;
               }
-              if (b.name > a.name) {
+              if (b.name.toLowerCase() > a.name.toLowerCase()) {
                 return 1;
               }
               return 0;

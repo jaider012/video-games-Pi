@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { createGame, getgenres } from "../../action/action";
+import { createGame, getgenres, getVideoGames } from "../../action/action";
 import "../../css/newgame.css";
 
 const NewGame = () => {
   const dispatch = useDispatch();
   const [validador, setvalidador] = useState("");
+  // const navigate = useNavigate();
 
   const genres = useSelector((state) => state.genres);
 
@@ -67,7 +68,10 @@ const NewGame = () => {
       setvalidador("Descripción requerida");
     } else if (valor.released.trim() === "") {
       setvalidador("Fecha de lanzamiento requerida");
-    } else if (valor.rating.trim() === "" && valor.rating > 6) {
+    } else if (
+      valor.rating.trim() === "" &&
+      (valor.rating < 6 || valor.rating > 0)
+    ) {
       setvalidador("El  Puntaje del 1 al 5");
     } else if (valor.platforms.length === 0) {
       setvalidador(" Una o más Plataformas");
@@ -77,6 +81,7 @@ const NewGame = () => {
       setvalidador("");
       alert("juego creado");
       dispatch(createGame(valor));
+      dispatch(getVideoGames());
       setvalor({
         name: "",
         description: "",
@@ -86,10 +91,11 @@ const NewGame = () => {
         platforms: [],
         genres: [],
       });
+
       document.getElementById("form").reset();
     }
   }
-
+  //*** Handles */
   const HandleChange = (e) => {
     e.preventDefault();
     setvalor({
@@ -107,7 +113,7 @@ const NewGame = () => {
     } else if (!e.target.checked) {
       setvalor({
         ...valor,
-        platforms: valor.platforms.filter((plata) => plata !== e.target.value),
+        platforms: valor.platforms.filter((plat) => plat !== e.target.value),
       });
     }
   }
@@ -121,16 +127,17 @@ const NewGame = () => {
     } else if (!e.target.checked) {
       setvalor({
         ...valor,
-        genres: valor.genres.filter((plata) => plata.name !== e.target.value),
+        genres: valor.genres.filter((genre) => genre !== e.target.value),
       });
     }
   }
+
   //***** */
   return (
     <div>
       <div>
         <Link to="/home">
-          <button className="button-back">Volver</button>
+          <button className="button-back1">Volver</button>
         </Link>
       </div>
       <h1 className="titulo-crear">Crea tu Juego</h1>
@@ -175,7 +182,7 @@ const NewGame = () => {
             className="input-formulario"
             type="number"
             max="5"
-            min='1'
+            min="1"
             placeholder="Descripcion del juego"
             name="rating"
             value={valor.rating}

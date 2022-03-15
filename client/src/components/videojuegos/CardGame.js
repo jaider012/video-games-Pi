@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../../css/cardgame.css";
 
@@ -15,13 +15,14 @@ const CardGame = ({ id, name, background_image, genres, rating }) => {
             <div>
               <span>Genero</span>
               <ul>
-                {genres && genres.map((e) => {
-                  return (
-                    <Fragment key={e}>
-                      <li>{e}</li>
-                    </Fragment>
-                  );
-                })}
+                {genres &&
+                  genres.map((e) => {
+                    return (
+                      <li key={e}>
+                        {e}
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
             <div>

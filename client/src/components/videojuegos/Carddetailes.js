@@ -1,29 +1,23 @@
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getgamebyid, resetDetailPage } from "../../action/action";
+import { getgamebyid} from "../../action/action";
 import { useEffect } from "react";
 import "../../css/gamedetail.css";
 
-export default function Carddetailes(props) {
-
+export default function Carddetailes() {
   let params = useParams();
 
   const id = params.id;
-  
+
   console.log(id);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getgamebyid(id));
-    return () => {
-      dispatch(resetDetailPage());
-    };
   }, [dispatch, id]);
 
   let gamedatalles = useSelector((state) => state.gamedetail);
-
- 
 
   return gamedatalles.length > 0 ? (
     <div className="Fondo-Detail">
@@ -61,7 +55,7 @@ export default function Carddetailes(props) {
 
             <h4 className="TituloGeneros"> 🏹 Generos :</h4>
             <div className="Conte-Generos">
-              { gamedatalles[0].genres.join(",  ")}
+              {gamedatalles[0].genres.join(",  ")}
             </div>
 
             <h4 className="TituloDescripcion">📖 Descripción :</h4>
