@@ -6,6 +6,7 @@ const Searchbar = () => {
   const dispatch = useDispatch();
 
   const [game, setgame] = useState("");
+  const [page404, setpage404] = useState(false)
 
   const Hadlesubmit = (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ const Searchbar = () => {
   const Hadlesearch = (e) => {
     e.preventDefault();
     setgame(e.target.value);
+
   };
 
   return (

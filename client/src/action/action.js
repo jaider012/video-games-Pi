@@ -19,7 +19,6 @@ export function getVideoGameByName(name) {
       let game = await axios.get(
         `http://localhost:3001/videogames?name=${name}`
       );
-
       return dispatch({
         type: types.byName,
         payload: game.data, //

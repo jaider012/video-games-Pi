@@ -19,7 +19,7 @@ export const reducer = (state = inicialState, action) => {
     case types.byName:
       return {
         ...state,
-        videogames: action.payload,
+        Copiavideogames: action.payload,
       };
     case types.byId:
       return {

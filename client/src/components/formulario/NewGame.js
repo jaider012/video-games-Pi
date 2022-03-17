@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useSelector, useDispatch  } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -49,7 +49,6 @@ const NewGame = () => {
   const gameupdate = useSelector((state) => state.gamedetail);
   const genres = useSelector((state) => state.genres);
   const [updated, setUpdated] = useState(false);
-
 
   useEffect(() => {
     // esto trae los generos
@@ -168,7 +167,12 @@ const NewGame = () => {
           <button className="button-back1">Volver</button>
         </Link>
       </div>
-      <h1 className="titulo-crear">Crea tu Juego</h1>
+      {id ? (
+        <h1 className="titulo-crear">Actualiza tu juego</h1>
+      ) : (
+        <h1 className="titulo-crear">Crea tu Juego</h1>
+      )}
+
       {validador && <div className="alerta">{validador}</div>}
       <form className="form" id="form" onSubmit={(e) => HandleSubmit(e)}>
         <div className="container-form">
