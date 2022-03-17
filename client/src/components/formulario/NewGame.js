@@ -1,17 +1,19 @@
 import { React, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch  } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-import { createGame, getgenres, getVideoGames } from "../../action/action";
+import {
+  createGame,
+  getgamebyid,
+  getgenres,
+  updatevideogame,
+} from "../../action/action";
 import "../../css/newgame.css";
 
 const NewGame = () => {
   const dispatch = useDispatch();
   const [validador, setvalidador] = useState("");
   // const navigate = useNavigate();
-
-  const genres = useSelector((state) => state.genres);
 
   let plataforms = [
     "PC",
@@ -43,11 +45,17 @@ const NewGame = () => {
     "PS2",
     "PS1",
   ];
+  const { id } = useParams();
+  const gameupdate = useSelector((state) => state.gamedetail);
+  const genres = useSelector((state) => state.genres);
+  const [updated, setUpdated] = useState(false);
+
 
   useEffect(() => {
     // esto trae los generos
     dispatch(getgenres());
-  }, [dispatch]);
+    id && dispatch(getgamebyid(id));
+  }, [dispatch, id]);
 
   const [valor, setvalor] = useState({
     name: "",
@@ -78,10 +86,16 @@ const NewGame = () => {
     } else if (valor.genres.length === 0) {
       setvalidador(" Un o más Generos");
     } else {
+      if (valor.name) {
+        if (!id) {
+          dispatch(createGame(valor));
+          alert("juego creado");
+        } else {
+          dispatch(updatevideogame(id, valor));
+          alert("juego modificado");
+        }
+      }
       setvalidador("");
-      alert("juego creado");
-      dispatch(createGame(valor));
-      dispatch(getVideoGames());
       setvalor({
         name: "",
         description: "",
@@ -94,6 +108,20 @@ const NewGame = () => {
 
       document.getElementById("form").reset();
     }
+  }
+
+  if (id && gameupdate.name && !updated) {
+    setvalor({
+      ...valor,
+      name: gameupdate.name,
+      description: gameupdate.description,
+      released: gameupdate.released,
+      rating: gameupdate.rating,
+      plataforms: gameupdate.platforms,
+      background_image: gameupdate.background_image,
+      genres: gameupdate.genres,
+    });
+    setUpdated(!updated);
   }
   //*** Handles */
   const HandleChange = (e) => {

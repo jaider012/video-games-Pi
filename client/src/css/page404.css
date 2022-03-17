@@ -1,0 +1,18 @@
+.center1 {
+width: 80vw;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3em;
+}
+.img404 {
+  width: 25vw;
+  height: 30vh;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.ert{
+  margin-bottom: 3em;
+}

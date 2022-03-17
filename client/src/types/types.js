@@ -18,4 +18,8 @@ export const types = {
   creaVideogame: "CREATE_VIDEOGAME",
   
   resetgame: "RESET_DETAIL_PAGE",
+
+  deletevideogame: "DELETE_VIDEOGAME",
+
+  updatevideogame: "UPDATE_VIDEOGAME"
 };

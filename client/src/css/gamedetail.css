@@ -186,7 +186,7 @@
 
   font-family: "Red Hat Display", sans-serif;
   transition: all 0.3s ease 0s;
-  z-index: 1;
+  z-index: 23456789;
 }
 
 .Contenedor-Boton{

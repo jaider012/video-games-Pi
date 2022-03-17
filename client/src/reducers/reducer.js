@@ -35,9 +35,17 @@ export const reducer = (state = inicialState, action) => {
 
     case types.creaVideogame:
       return {
-        ...state
+        ...state,
       };
-      
+
+    case types.deletevideogame:
+      return {
+        ...state,
+      };
+    case types.updatevideogame:
+      return {
+        ...state,
+      };
     //*****FILTROS
     case types.filterbyname:
       const orderGames =
@@ -63,27 +71,29 @@ export const reducer = (state = inicialState, action) => {
 
       return {
         ...state,
-        videogames: orderGames,
+        Copiavideogames: orderGames,
       };
 
     case types.filtergenres:
-      let Copiaestado = state.Copiavideogames;
+      let Copiaestado = state.videogames;
       let filterGenre = Copiaestado.filter((el) =>
         el.genres.includes(action.payload)
       );
       return {
         ...state,
-        videogames: action.payload === "todos" ? Copiaestado : filterGenre,
+        Copiavideogames: action.payload === "todos" ? Copiaestado : filterGenre,
       };
 
     case types.filterdbgames:
-      const totalGames = state.Copiavideogames;
-      const filterCreatedGames = action.payload === "db"
-          ? totalGames.filter(ele => ele.createdVideoGame === true)
-          : totalGames.filter(ele => ele.createdVideoGame !== true);
+      const totalGames = state.videogames;
+      const filterCreatedGames =
+        action.payload === "db"
+          ? totalGames.filter((ele) => ele.createdVideoGame === true)
+          : totalGames.filter((ele) => ele.createdVideoGame !== true);
       return {
         ...state,
-        videogames: action.payload === "All" ? totalGames : filterCreatedGames,
+        Copiavideogames:
+          action.payload === "All" ? totalGames : filterCreatedGames,
       };
 
     case types.filterbyrating:
@@ -110,7 +120,7 @@ export const reducer = (state = inicialState, action) => {
 
       return {
         ...state,
-        videogames: orderGamesRating,
+        Copiavideogames: orderGamesRating,
       };
 
     default:

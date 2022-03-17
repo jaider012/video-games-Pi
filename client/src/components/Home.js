@@ -15,11 +15,12 @@ import {
 import { useEffect, useState } from "react";
 
 import Paginado from "./videojuegos/Paginado";
+import Page404 from "./videojuegos/Page404";
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   // ***aqui traigo mis  datos del estado global***
-  const { videogames, genres } = useSelector((store) => store);
+  const { Copiavideogames, genres} = useSelector((store) => store);
 
   // ****PAGINADO***
 
@@ -29,7 +30,7 @@ const Home = () => {
   const [videoGamesparPage, setvideoGamesPerPage] = useState(16); //declaro otro estado local donde tengo la cantidad de juegos por pagina
   const inOfLastGame = currentPage * videoGamesparPage; //seteo el indice del ultimo juego y le digo sobre la pag actual multiplicame la cantidad de juegos por pagina
   const inOfFristGame = inOfLastGame - videoGamesparPage; // necesito setear el indice de mi primer juego en cad apag, ya que a medida q cambie la pag el primer juego cambia
-  const currentVideoGames = videogames?.slice(inOfFristGame, inOfLastGame);
+  const currentVideoGames = Copiavideogames?.slice(inOfFristGame, inOfLastGame);
 
   const paging = (pages) => {
     setCurrentPage(pages);
@@ -75,6 +76,8 @@ const Home = () => {
   const handleFilterVideoGamesDB = (e) => {
     e.preventDefault();
     dispatch(filtergameDB(e.target.value));
+    setCurrentPage(1);
+  
   };
 
   //**** */
@@ -86,7 +89,7 @@ const Home = () => {
       <div className="contenedor-filtro">
         <Paginado
           videoGamesparPage={videoGamesparPage}
-          allGames={videogames.length}
+          allGames={Copiavideogames.length}
           paging={paging}
         />
       </div>
@@ -170,7 +173,7 @@ const Home = () => {
               );
             })
           ) : (
-            <p>no games found</p>
+            <Page404 />
             //
           )
         ) : (
@@ -180,7 +183,7 @@ const Home = () => {
       <div className="contenedor-filtro">
         <Paginado
           videoGamesparPage={videoGamesparPage}
-          allGames={videogames.length}
+          allGames={Copiavideogames.length}
           paging={paging}
         />
       </div>

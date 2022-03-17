@@ -57,7 +57,28 @@ export function getgenres() {
   };
 }
 
-//****
+//**** DELETE Y UPDATE
+export function deletevideogame(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/videogame/${id}`);
+      return dispatch({ type: types.deletevideogame });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export const updatevideogame = (id, data) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/videogame/${id}`, data);
+    return dispatch({
+      type: types.updatevideogame,
+    });
+  };
+};
+
+
 
 //**** FILTROS
 
@@ -99,7 +120,12 @@ export function resetDetailPage() {
 export function createGame(payload) {
   return async function (dispatch) {
     const info = await axios.post(`http://localhost:3001/videogame`, payload);
-    console.log("QUE INFO TRAE DE POST:", info.data,'INFO QUE LE ENVIO ', payload);
+    console.log(
+      "QUE INFO TRAE DE POST:",
+      info.data,
+      "INFO QUE LE ENVIO ",
+      payload
+    );
     return dispatch({
       type: types.creaVideogame,
       payload: info.data,

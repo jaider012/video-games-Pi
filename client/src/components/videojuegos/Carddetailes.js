@@ -1,24 +1,34 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getgamebyid} from "../../action/action";
+import {
+  deletevideogame,
+  getgamebyid,
+  updataPokemon,
+  updatevideogame,
+} from "../../action/action";
 import { useEffect } from "react";
 import "../../css/gamedetail.css";
 
 export default function Carddetailes() {
   let params = useParams();
-
   const id = params.id;
 
-  console.log(id);
-
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getgamebyid(id));
   }, [dispatch, id]);
 
   let gamedatalles = useSelector((state) => state.gamedetail);
 
+  const handleDelete = () => {
+    dispatch(deletevideogame(id));
+    navigate("/home");
+  };
+  const handleUpdata = () => {
+    dispatch(updatevideogame(id));
+    navigate(`/updatevideogame/${id}`);
+  };
   return gamedatalles.length > 0 ? (
     <div className="Fondo-Detail">
       <div className="container-info">
@@ -27,6 +37,20 @@ export default function Carddetailes() {
             <Link to="/home">
               <button className="button-back">Volver</button>
             </Link>
+          </div>
+          <div>
+            {typeof gamedatalles[0].id === "string" && (
+              <button onClick={handleUpdata} className="button-back">
+                UPDATE
+              </button>
+            )}
+          </div>
+          <div>
+            {typeof gamedatalles[0].id === "string" && (
+              <button onClick={handleDelete} className="button-back">
+                DELETE
+              </button>
+            )}
           </div>
         </div>
         <div className="Conte-Sub">

@@ -13,6 +13,8 @@ export const Approuter = () => {
         <Route exact path="/home" element={<Home />} />
         <Route path="/create" element={<NewGame />} />
         <Route exact path="/home/:id" element={<Carddetailes/>} />
+        <Route path="/updatevideogame/:id" element={<NewGame />} />
+        <Route path="*" element={<Inicio />} />
       </Routes>
     </Router>
   );

@@ -86,4 +86,14 @@ div {
     gap: 10px;
     margin: 0;
   }
+  .contenedor-filtro {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em;
+    margin-bottom: 1em;
+
+    cursor: pointer;
+  }
 }

@@ -34,6 +34,21 @@ const getvideogames = async () => {
     console.log(error);
   }
 };
+// const getvideogames = () => {
+//   try {
+//     const games = [];
+//     let url = `https://api.rawg.io/api/games?key=${API_KEY}`;
+//     for (let i = 1; i < 8; i++) {
+//       axios.get(url).then((resultado) => {
+//         url = resultado.data.next;
+//       });
+//     }
+//     console.log(games)
+//     return games;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 const getdbgames = async () => {
   let dbgamesdata = await Videogame.findAll({
     //busca el juego en la base de datos y o retorna
@@ -62,20 +77,34 @@ const getdbgames = async () => {
   return newdatagame;
 };
 
-const getAllInfo = async () => {
+// const getAllInfo = async () => {
+//   //Concatena el array que viene tanto por la api como por la db
+//   try {
+//     let apInfo = await getvideogames();
+//     let dbgames = await getdbgames();
+
+//     const allinfo = apInfo.concat(dbgames);
+
+//     return allinfo; //info concat
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+const getAllInfo = () => {
   //Concatena el array que viene tanto por la api como por la db
   try {
-    let apInfo = await getvideogames();
-    let dbgames = await getdbgames();
-
-    const allinfo = apInfo.concat(dbgames);
+    let allinfo = Promise.all([getvideogames(), getdbgames()]).then(
+      (resultado) => {
+       return [...resultado[0], ...resultado[1]];
+      }
+    );
 
     return allinfo; //info concat
   } catch (error) {
     console.log(error);
   }
 };
-
 router.get("/videogames", async (req, res) => {
   //DEVUELVE LOS JUEGOS SI NO LE PASAN QUERY, SI LE PASAN QUERY LO BUSCA Y DEVUELVE LAS PRIMERAS 15 COINCIDENCIAS
   const { name } = req.query;
@@ -182,12 +211,56 @@ router.post("/videogame", async function (req, res) {
         console.log(e);
         // recorro por los generos que me pasen y los busco en mi base de datos
         let genderDB = await Genres.findAll({ where: { name: e } });
-        await newGame.addGenres(genderDB); // le agrego a mi juego creado el genero seleccionado de la base/ no se por que no esta funcionando
+        await newGame.addGenres(genderDB); // le agrego a mi juego creado el genero seleccionado de la base/
       });
 
       console.log(newGame);
       res.status(200).json(newGame);
     }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/videogame/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const gameupid = await Videogame.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    await gameupid.update({
+      name: req.body.name,
+      rating: req.body.rating,
+      released: req.body.released,
+      description: req.body.description,
+      platforms: req.body.platforms,
+    });
+
+    req.body.genres.forEach(async (e) => {
+      // recorro por los generos que me pasen y los busco en mi base de datos
+      let genderDB = await Genres.findAll({ where: { name: e } });
+      await gameupid.setGenres(genderDB);
+    });
+
+    res.send(gameupid);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/videogame/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const videogamedelete = await Videogame.findByPk(id);
+    if (videogamedelete) {
+      await videogamedelete.destroy();
+      return res.send("video juego elimindado");
+    }
+    res.status(404).send("videogame no encontrado");
   } catch (error) {
     console.log(error);
   }

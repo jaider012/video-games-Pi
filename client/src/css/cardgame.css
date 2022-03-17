@@ -42,7 +42,6 @@ img {
   overflow: hidden;
 }
 .general-info {
-
   font-weight: 400;
   flex: 1;
 }
@@ -77,4 +76,60 @@ img {
   height: 100%;
   background-image: linear-gradient(to right, #161616, transparent);
   z-index: 2;
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: clamp(500px, 10vw, 500px);
+    display: flex;
+    padding: 0.7rem;
+    transition: all 0.4s;
+    box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+
+    border-radius: 1rem;
+
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    width: clamp(300px, 100px, 50px);
+    display: flex;
+    padding: 0.5rem;
+    transition: all 0.4s;
+    box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+
+    border-radius: 1rem;
+
+    position: relative;
+    overflow: hidden;
+    margin-left: 10vw;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0%;
+    width: 10%;
+ 
+    z-index: 2;
+  }
+  .cover1 {
+   width: 100%;
+   z-index: -1;
+  }
+
+.card-title {
+  color: white;
+  font-weight: 400;
+  padding: 0.2em;
+
+}
+.general-info {
+  color: white;
+  font-weight: 400;
+  flex: 1;
+}
 }
