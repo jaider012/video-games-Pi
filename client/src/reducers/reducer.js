@@ -5,7 +5,7 @@ const inicialState = {
   Copiavideogames: [],
   genres: [],
   gamedetail: [],
-};
+};  
 
 export const reducer = (state = inicialState, action) => {
   ///****MANEJO DEL ESTADO */

@@ -1,5 +1,5 @@
 import React from "react";
-import spiderman from "../../img/spiderman.jpg";
+import mario from "../../img/mariogirando.webp"
 import "../../css/page404.css";
 
 const Page404 = () => {
@@ -7,13 +7,17 @@ const Page404 = () => {
     <div className="center1">
       <div className="grid3">
         <div>
-          <img className="img404" src={spiderman} alt="img-404page"></img>
+          <img className="img404" src={mario} alt="img-404page"></img>
         </div>
         <div>
           <div>
-            <h1 className="ert">404 page</h1>
-            <h2>UH OH! You're lost.</h2>
+    
+            <div className="stage">
+              <div className="layer"></div>
+              <h2>UH OH! You're lost.</h2>
+            </div>
           </div>
+
           <div className="ert">
             <p>
               The page you are looking for does not exist. How you got here is a
@@ -22,12 +26,12 @@ const Page404 = () => {
             </p>
           </div>
           <button
-            className="button-submit"
+            className="button-submit1"
             onClick={() => {
               window.location.reload();
             }}
           >
-             home 
+            home
           </button>
         </div>
       </div>

@@ -38,8 +38,8 @@ const Home = () => {
 
   //**** */
 
-  const getdata = async () => {
-    await dispatch(getVideoGames());
+  const getdata = () => {
+    dispatch(getVideoGames());
     setLoading(true);
   };
   useEffect(() => {
@@ -173,7 +173,7 @@ const Home = () => {
               );
             })
           ) : (
-            <Page404 />
+       <img src={mariogirando} alt="mario" className="mario"></img>
             //
           )
         ) : (

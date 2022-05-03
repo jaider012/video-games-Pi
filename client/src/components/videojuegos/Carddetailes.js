@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deletevideogame,
   getgamebyid,
-  updataPokemon,
   updatevideogame,
 } from "../../action/action";
 import { useEffect } from "react";
